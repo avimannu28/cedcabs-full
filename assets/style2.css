@@ -1,0 +1,84 @@
+#active a {
+    color: green;
+}
+
+#active li:hover {
+    background-color: black;
+    border-radius: 0.8rem;
+}
+
+#active a:hover {
+    color: white;
+}
+
+.bg-overlay {
+    background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("./cab.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 850px;
+    padding-top: 50px;
+}
+
+#mid {
+    color: white;
+}
+
+#side {
+    width: 45%;
+    background-color: white;
+}
+
+#mid {
+    color: white;
+}
+
+#side {
+    width: 38%;
+    background-color: white;
+    height: 72%;
+    border: 6px solid black;
+}
+
+footer .fa {
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 50px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    #mid {
+        color: white;
+    }
+    #side {
+        width: 90%;
+        background-color: white;
+        height: 65%;
+        border: 2px solid black;
+    }
+}
+
+#footer a {
+    color: white;
+}
+
+#book {
+    background-color: black;
+    color: white;
+    padding-top: 10px;
+    margin: 3px !important;
+}
+
+select {
+    -webkit-appearance: none;
+}
+
+.copyright a {
+    color: black;
+    font-weight: bolder;
+}
