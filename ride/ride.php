@@ -29,13 +29,13 @@ $ride=new ride();
         if(!isset($_SESSION["booked"])){
             $ride->rider($_SESSION["current"], $_SESSION["destination"],$_SESSION["distance"],$_SESSION["luggage"],$_SESSION["total"],$_SESSION["user_id"]);
             echo "<script>alert('wait for to confirm')</script>";
+            echo "<script>alert('Rrefresh Again')</script>";
+            
            
         }else{
             $ride->ride_success();
-            echo "<script> setInterval(function() {
-                window.location.reload();
-              }, 30000);</script> ";
-            
+            header("location:../user/user_invoice.php");
+          
         }
 
     }
@@ -45,6 +45,7 @@ $ride=new ride();
         session_destroy();
         header("location:../Login.php");
     }
+
   
 
   
@@ -116,8 +117,30 @@ $ride=new ride();
             </nav>
         </div>
 
+    <?php echo "<h1 style='text-align:center margin-bottom:100px;'>PLEASE WAIT AND REFRESH AGAIN TO GET INVOICE</h1>" ?>
+
+        <footer class="page-footer font-small blue">
+            <div class="row">
+                <div class="col-sm-4 text-center py-3">
+                    <a href="#" class="fa fa-facebook "></a>
+                    <a href="#" class="fa fa-twitter "></a>
+                    <a href="#" class="fa fa-instagram "></a>
+                </div>
+                <div class="col-sm-4 copyright" id="">
+                    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                        <a href="#">CedCabs</a>
+                    </div>
+                </div>
+                <div class="col-sm-4 px-0 mx-0 copyright">
+                    <div class="footer-copyright text-center py-3">Designed By:
+                        <a href="#">CedCabs Developer</a>
+                    </div>
+                </div>
+
+            </div>
 
         </footer>
+
 
 
 </body>

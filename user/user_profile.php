@@ -71,6 +71,9 @@ $(document).ready(function() {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto pl-auto text-center" id='active'>
                         <li class="nav-item mr-4">
+                            <a class="nav-link" href="dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item mr-4">
                             <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item ml-2">
@@ -101,6 +104,7 @@ $(document).ready(function() {
                 <th>From</th>
                 <th>To</th>
                 <th>Spend On Ride</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody id="show">
@@ -109,7 +113,15 @@ $(document).ready(function() {
             
             $row=$profile->profiles($_SESSION["user_id"]);
             foreach($row as $key=>$value){
-                echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td></tr>";
+                if($value["statuss"]=='0'){
+                    echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td>Wait to confirm</td></tr>";
+                }elseif($value["statuss"]=='1'){
+                    echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td>Pending</td></tr>";
+                }
+                else{
+                    echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td>Completed</td></tr>";
+                }
+               
             }
             ?>
             </tr>
@@ -117,6 +129,27 @@ $(document).ready(function() {
         </tbody>
     </table>
     <p id="Price"></p>
+    <footer class="page-footer font-small blue">
+        <div class="row">
+            <div class="col-sm-4 text-center py-3">
+                <a href="#" class="fa fa-facebook "></a>
+                <a href="#" class="fa fa-twitter "></a>
+                <a href="#" class="fa fa-instagram "></a>
+            </div>
+            <div class="col-sm-4 copyright" id="">
+                <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                    <a href="#">CedCabs</a>
+                </div>
+            </div>
+            <div class="col-sm-4 px-0 mx-0 copyright">
+                <div class="footer-copyright text-center py-3">Designed By:
+                    <a href="#">CedCabs Developer</a>
+                </div>
+            </div>
+
+        </div>
+
+    </footer>
 </body>
 
 </html>

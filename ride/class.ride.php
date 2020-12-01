@@ -13,13 +13,14 @@ session_start();
         public function rider($current,$destination,$total_distance,$luggage,$total_fare,$user_id){
             $sql= mysqli_query($this->conn, "INSERT INTO tbl_ride(ride_date,from_location,to_location,total_distance,luggage,total_fare,statuss,customer_user_id)
             VALUES(NOW(),'$current','$destination','$total_distance','$luggage','$total_fare',0,'$user_id')");
-            $_SESSION["booked"]=$current;
-            
+            $_SESSION["booked"]=$current;  
+       
         }
         public function ride_success(){
             $sql=mysqli_query($this->conn,"select * from tbl_ride where customer_user_id=$_SESSION[user_id] and statuss='1'");
-            echo "<script>alert('Booked Successfully')</script>";
-            header("location:../user/user_invoice.php");
+            echo "<script>alert('Booked Successfully')</script>"; 
+          
+          
             
         }
 

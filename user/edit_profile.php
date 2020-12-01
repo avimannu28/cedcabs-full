@@ -21,7 +21,7 @@
 
 <head>
     <meta charset="UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -40,7 +40,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    
+    <link rel="stylesheet" href="../assets/form.css">
+
 </head>
 
 
@@ -59,10 +60,14 @@
                         <li class="nav-item mr-4">
                             <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
                         </li>
+                        <li class="nav-item mr-4">
+                            <a class="nav-link" href="dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
+                        </li>
                         <li class="nav-item ml-2">
                             <a class="nav-link" href="user_profile.php">Rides Detail</a>
                         </li>
                         <form action="post">
+
                             <input type="submit" name="logout" value="logout"
                                 style="background-color:white;border:none;">
                         </form>
@@ -71,48 +76,42 @@
             </nav>
         </div>
     </form>
-  
+    <div class="container-fluid bg-overlay">
+        <div class="row text-center">
+        </div>
+    <div class="container-fluid dash_cus">
+        <div class="container">
+            <div class="row pt-4">
+                <div class="col-sm-6">
+                    <div class="user_info">
+                        <div class="col-sm-12" style="margin-left:490px;width:50%;">
+                            <h2 style="color:white">EDIT DATA</h2>
+                        </div>
+                        <div class="col-sm-12" style="margin-left:400px;">
+                            <div class="form-group row">
+                                <form method="POST">
+                                    <div id="sc-edprofile">
+                                        <h1>Edit Profile Form</h1>
+                                        <div class="sc-container">
+                                            <input type="text" placeholder="Name" name="name"
+                                                value=<?php echo $name;  ?> />
+                                            <input type="text" placeholder="Phone" name="phone"
+                                                value=<?php  echo  $phone?> />
+                                            <input type="submit" value="Update" name="submit" />
+                                        </div>
+                                    </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
-<div class="container-fluid dash_cus"> 
-	<div class="container">
-		<div class="row pt-4">
-			<div class="col-sm-6">
-				<div class="user_info">
-					<div class="col-sm-12">
-						<h2>Profile</h2>
-					</div>
-					<div class="col-sm-12">
-						<form method="POST">
-							<div class="form-group row">
-								<label for="newName" class="col-md-3 col-form-label">Name</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control cus_input" id="" name="name" value=<?php echo $name;  ?>>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="newName" class="col-md-3 col-form-label">phone No</label>
-								<div class="col-md-9">
-									<input type="text" class="form-control cus_input" id="" name="phone" value=<?php  echo  $phone?>>
-								</div>
-							</div>
-						
-							<div class="form-group row">
-								<label for="newName" class="col-md-3 col-form-label"></label>
-								<div class="col-md-9">
-									<input type="submit" value="Update" class="form-control cus_input_btn" name="submit">
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>		
-			</div>
-			
-			
-			
-			
-		</div>
-	</div>
-</div>
+
+
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -6,7 +6,12 @@ include_once './user.php';
         $name=$_POST["name"];
         $mobile=$_POST["phone_no"];
         $password=$_POST["password"];
-        $user->signup($username,$password,$mobile,$password);
+        if($username==""||$name==""||$mobile==""||$password==""){
+            echo "<script>alert('Enter all Field first')</script>";
+        }else{
+            $user->signup($username,$password,$mobile,$password);
+        }
+        
     }
 ?>
 
@@ -23,7 +28,7 @@ include_once './user.php';
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/style2.css">
+    <link rel="stylesheet" href="./assets/signup.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="data.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -48,7 +53,7 @@ include_once './user.php';
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto pl-auto text-center" id='active'>
                     <li class="nav-item mr-4">
-                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ml-2">
                         <a class="nav-link" href="#">Feature</a>
@@ -91,12 +96,11 @@ include_once './user.php';
                                 <input type="password" class="form-control" placeholder="Password" name="password">
                             </div>
                             <p id="Price" class="text-center"></p>
-                            <input type="submit" class="btn btn-success  pl-4 pr-4 mt-4 text-center" value="Sign In"
+                            <input type="submit" class="btn btn-dark ml-4 pl-4 pr-4 mt-4 text-center" value="Sign In"
                                 name="submit">
+                                <a href="Login.php" class="btn btn-dark ml-4 pl-4 pr-4 mt-4">Login</a>
                         </form>
-                        <div class="form-group text-center">
-                            <a href="Login.php">Login</a>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

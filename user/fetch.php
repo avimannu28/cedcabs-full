@@ -105,6 +105,41 @@
          
 
         }
-       
+       public function total_ride_of_user($id){
+         $sum=0;
+         $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where customer_user_id=$id");
+         while($data=mysqli_fetch_assoc($sql)){
+           $sum=$sum+1;
+         }
+         return $sum;
+       }
+
+
+
+       public function total_spend_of_user($id){
+            $sum=0;
+         $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where customer_user_id=$id");
+         while($data=mysqli_fetch_assoc($sql)){
+           $sum=$sum+$data["total_fare"];
+         }
+         return $sum;
+       }
+
+       public function ride_pending($id){
+        $sum=0;
+     $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where customer_user_id=$id and statuss='1'");
+     while($data=mysqli_fetch_assoc($sql)){
+       $sum=$sum+1;
+     }
+     return $sum;
+   }
+        public function ride_completed($id){
+          $sum=0;
+          $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where customer_user_id=$id and statuss='2'");
+          while($data=mysqli_fetch_assoc($sql)){
+            $sum=$sum+1;
+      }
+      return $sum;
+}
     }
 ?>

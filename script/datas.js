@@ -43,18 +43,22 @@ $(document).ready(function() {
         if (isNaN(luggages)) {
             console.log("ok")
             $("#Price").html("ENTER Luggage In number")
+        } else if (current == "SELECT" || destination == "SELECT" || selected == "SELECT") {
+            alert("PLEASE SELECT ALL FIELD FIRST")
+
         } else {
             console.log("done");
             $.ajax({
-                url: "data.php",
-                type: "POST",
+                url: './user/data.php',
+                type: 'POST',
                 data: { current: current, destination: destination, selected: selected, luggages: luggages },
                 success: function(response) {
                     $("#books").css("display", "block");
                     $("#Price").css("display", "block");
-
-
+                    $("#fare").css("display", "inline");
                     $("#Price").val(response)
+                    console.log("inside");
+
                 }
             });
         }

@@ -71,6 +71,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <button onclick="window.print()" style="margin-left:200px;">Print this page</button>
 
                     </div>
 

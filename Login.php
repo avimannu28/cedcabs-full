@@ -23,7 +23,7 @@
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style1.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="data.js"></script>
+    <script src="./user/datafetch.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -35,31 +35,42 @@
 
 
 <body>
+<form method="post">
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-light">
-            <img class="navbar-brand img-responsive" src='./assets/logo.png' height=100 width=200>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <img class="navbar-brand img-responsive" src='./logo.png' height=100 width=200>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto pl-auto text-center" id='active'>
+                    <li class="nav-item mr-4">
+                        <a class="nav-link" href="index.php?data=name">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a class="nav-link" href="#">Feature</a>
+                    </li>
+                    <li class="nav-item ml-4">
+                        <a class="nav-link" href="./Login.php">Login</a>
+                    </li>
+                   
                 </ul>
             </div>
         </nav>
     </div>
+    </form>
 
-    <div class="container-fluid bg-overlay">
-        <div class="row text-center">
+    <div class="container-fluid bg-overlay" >
+        <div class="row text-center" >
             <div class="col text-center" id="mid">
                 <h1>Book a City Taxi to your destination in town</h1>
                 <h4>Choose from range of category and prices</h4>
             </div>
         </div>
         <div class="ml-4 pb-4" id="side">
-            <div class="container">
-                <div class="row">
-                    <div class="container">
+            <div class="container" >
+                <div class="row" >
+                    <div class="container" >
                         <div class="col col-sm-12 col-12 col-xs-12 mt-4 text-center p-1  py-0" id="book">
                             <p class='pt-2'>CEDCABS</p>
                         </div>
@@ -70,19 +81,16 @@
                                 <input type="text" class="form-control" placeholder="Enter UserName" name="username"
                                     required>
                             </div>
-
                             <div class="form-group">
                                 <input type="password" class="form-control" placeholder="Password" name="password"
                                     required>
                             </div>
-
-                            <input type="submit" name="submit" class="btn btn-success  pl-4 pr-4 mt-4" value="LogIn">
+                            <input type="submit" name="submit" class="btn btn-dark ml-4  pl-4 pr-4 mt-4" value="LogIn">
+                            <a href="signup.php" class="btn btn-dark pl-4 pr-4 ml-4 mt-4">SignUp</a>
                         </form>
                         <div class="form-group text-center">
-                            <a href="signup.php">SignUp</a>
+                         
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -105,12 +113,8 @@
                     <a href="#">CedCabs Developer</a>
                 </div>
             </div>
-
         </div>
-
     </footer>
-
-
 </body>
 
 </html>

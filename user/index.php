@@ -31,7 +31,7 @@ session_start();
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style2.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="data.js"></script>
+    <script src="../script/datafetch.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -55,14 +55,17 @@ session_start();
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto pl-auto text-center" id='active'>
                         <li class="nav-item mr-4">
-                            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="dashboard.php">DashBoard<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item mr-4">
+                            <a class="nav-link" href="user_profile.php">Previous Ride<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item ml-2">
                             <a class="nav-link" href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Edit
                                 Profile</a>
                         </li>
                         <li class="nav-item ml-2">
-                            <a class="nav-link" href="user_profile.php">Rides Detail</a>
+                           
                         </li>
                         <form action="post">
                             <input type="submit" name="logout" value="logout"
@@ -128,9 +131,10 @@ session_start();
                                     id="luggages">
                             </div>
                             <input type="text" name="price" id="Price" style="display:none;">
-                            <input type="submit" class="btn btn-success  pl-4 pr-4 mt-4" name="submit" value='book'
+                            <input type="submit" class="btn btn-dark  pl-4 pr-4 mt-4" name="submit" value='book'
                                 id="books" style="display:none;">
-                            <button class="btn btn-success  pl-4 pr-4 mt-4" value="Calculate Fare" id="submit">Calculate
+                            <button class="btn btn-dark  pl-4 pr-4 mt-4" value="Calculate Fare" id="submit"
+                                style="display:inline">Calculate
                                 Fare</button>
                         </form>
                     </div>
