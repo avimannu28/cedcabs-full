@@ -33,7 +33,7 @@
                         if($data["isblock"]=='0'){
                             $_SESSION["isblock"]=$data["isblock"];
                             $_SESSION["user_id"]=$data["user_id"];
-                            header("location:./user/index.php");
+                            header("location:./user/dashboard.php");
                         }   
                     }
                 }  

@@ -5,6 +5,9 @@ session_start();
     session_destroy();
     header("location:../Login.php");
 }
+if(isset($_SESSION["distance"])){
+    header("location:../ride/ride.php");
+}
 $total_ride=new Fetch();
 $sum=$total_ride->total_ride_of_user($_SESSION["user_id"]);
 $total_Spend=$total_ride->total_spend_of_user($_SESSION["user_id"]);
