@@ -8,6 +8,9 @@ session_start();
 if(isset($_SESSION["distance"])){
     header("location:../ride/ride.php");
 }
+if(!isset($_SESSION["isblock"])){
+    header("location:../Login.php");
+}   
 $total_ride=new Fetch();
 $sum=$total_ride->total_ride_of_user($_SESSION["user_id"]);
 $total_Spend=$total_ride->total_spend_of_user($_SESSION["user_id"]);
@@ -54,7 +57,7 @@ $completed_ride=$total_ride->ride_completed($_SESSION["user_id"]);
     <form method="post">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
-                <img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200>
+            <a href='index.php'><img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -65,9 +68,19 @@ $completed_ride=$total_ride->ride_completed($_SESSION["user_id"]);
                         <li class="nav-item mr-4">
                             <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item mr-4">
-                            <a class="nav-link" href="user_profile.php">Previous Ride<span
-                                    class="sr-only">(current)</span></a>
+                        <li>
+                            <div class="dropdown show">
+                                <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ride
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="pending.php">Pending</a>
+                                    <a class="dropdown-item" href="canceled.php">Canceled</a>
+                                    <a class="dropdown-item" href="completed.php">Completed</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item ml-2">
                             <a class="nav-link" href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Edit
@@ -121,28 +134,32 @@ $completed_ride=$total_ride->ride_completed($_SESSION["user_id"]);
                 </div>
                 <div class="c-dashboardInfo col-lg-3 col-md-6">
                     <div class="wrap">
-                        <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">PENDING
-                            RIDE<svg class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true"
-                                role="presentation">
-                                <path fill="none" d="M0 0h24v24H0z"></path>
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
-                                </path>
-                            </svg></h4><span
-                            class="hind-font caption-12 c-dashboardInfo__count"><?php echo $pendind_ride; ?></span>
+                        <a href="pending.php">
+                            <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">PENDING
+                                RIDE<svg class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24"
+                                    aria-hidden="true" role="presentation">
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+                                    </path>
+                                </svg></h4><span
+                                class="hind-font caption-12 c-dashboardInfo__count"><?php echo $pendind_ride; ?></span>
+                        </a>
                     </div>
                 </div>
                 <div class="c-dashboardInfo col-lg-3 col-md-6">
                     <div class="wrap">
-                        <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Completed
-                            Ride<svg class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24" aria-hidden="true"
-                                role="presentation">
-                                <path fill="none" d="M0 0h24v24H0z"></path>
-                                <path
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
-                                </path>
-                            </svg></h4><span
-                            class="hind-font caption-12 c-dashboardInfo__count"><?php echo $completed_ride; ?></span>
+                        <a href="completed.php">
+                            <h4 class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title">Completed
+                                Ride<svg class="MuiSvgIcon-root-19" focusable="false" viewBox="0 0 24 24"
+                                    aria-hidden="true" role="presentation">
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z">
+                                    </path>
+                                </svg></h4><span
+                                class="hind-font caption-12 c-dashboardInfo__count"><?php echo $completed_ride; ?></span>
+                        </a>
                     </div>
                 </div>
             </div>

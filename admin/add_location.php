@@ -19,6 +19,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../assets/location.css">
+    <script>
+        $(document).ready(function(){
+            $("#distance").on("keyup",function(){
+                distance=$("#distance").val()
+                if(isNaN(distance)){
+                    distance = distance.slice(0, -1);
+                $("#distance").val(distance);
+                }
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -26,7 +37,7 @@
         <label for="name">Location</label>
         <input type="text" id="name" name="location" placeholder="Location Name">
         <label for="name">Distance</label>
-        <input type="text" id="name" name="distance" placeholder="distance">
+        <input type="text" id="distance" name="distance" placeholder="distance">
         <label for="Available">Available</label>
         <select name='available'>
             <option value='1'>available</option>

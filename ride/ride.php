@@ -27,16 +27,9 @@ $ride=new ride();
     }
     else{
         if(!isset($_SESSION["booked"])){
-            $ride->rider($_SESSION["current"], $_SESSION["destination"],$_SESSION["distance"],$_SESSION["luggage"],$_SESSION["total"],$_SESSION["user_id"]);
-            echo "<script>alert('wait for to confirm')</script>";
-            echo "<script>alert('Rrefresh Again')</script>";
-            
-           
-        }else{
-            $ride->ride_success();
-            header("location:../user/user_invoice.php");
-          
-        }
+            $ride->rider($_SESSION["current"], $_SESSION["destination"],$_SESSION["distance"],$_SESSION["luggage"],$_SESSION["total"],$_SESSION["user_id"]);  
+        }$ride->ride_success();
+        header("location:../user/user_invoice.php");
 
     }
 

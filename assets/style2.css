@@ -82,3 +82,7 @@ select {
     color: black;
     font-weight: bolder;
 }
+
+#dropdownMenuLink a {
+    color: black;
+}

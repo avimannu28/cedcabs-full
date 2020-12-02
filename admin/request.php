@@ -94,7 +94,7 @@ session_start();
 
 
     public function total_earning(){
-        $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride");
+        $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where statuss='2'");
         $result=$sql->num_rows;
         $sum=0;
         while($data=mysqli_fetch_assoc($sql)){

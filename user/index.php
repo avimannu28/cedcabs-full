@@ -47,7 +47,7 @@ session_start();
     <form method="post">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
-                <img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200>
+                <a href='index.php'><img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -58,15 +58,27 @@ session_start();
                         <li class="nav-item mr-4">
                             <a class="nav-link" href="dashboard.php">DashBoard<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item mr-4">
-                            <a class="nav-link" href="user_profile.php">Previous Ride<span class="sr-only">(current)</span></a>
-                        </li>
+                      
                         <li class="nav-item ml-2">
                             <a class="nav-link" href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Edit
                                 Profile</a>
                         </li>
+                        <li>
+                        <div class="dropdown show">
+                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ride 
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="pending.php">Pending</a>
+                                <a class="dropdown-item" href="canceled.php">Canceled</a>
+                                <a class="dropdown-item" href="completed.php">Completed</a>
+                            </div>
+                        </div>
+                        </li>
                         <li class="nav-item ml-2">
-                           
+
                         </li>
                         <form action="post">
                             <input type="submit" name="logout" value="logout"

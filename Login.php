@@ -45,15 +45,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto pl-auto text-center" id='active'>
                     <li class="nav-item mr-4">
-                        <a class="nav-link" href="index.php?data=name">Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link btn btn-dark" href="index.php?data=name" style='color:white'>Book Cab<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ml-2">
                         <a class="nav-link" href="#">Feature</a>
                     </li>
-                    <li class="nav-item ml-4">
-                        <a class="nav-link" href="./Login.php">Login</a>
-                    </li>
-                   
+                    
                 </ul>
             </div>
         </nav>

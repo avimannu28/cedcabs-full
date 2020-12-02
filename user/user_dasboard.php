@@ -39,7 +39,7 @@ if(!isset($_SESSION["isblock"])){
     <form method="post">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
-                <img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200>
+            <a href='index.php'><img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">

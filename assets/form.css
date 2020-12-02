@@ -56,6 +56,7 @@ div#sc-edprofile .sc-container {
 
 div#sc-edprofile input[type="email"],
 div#sc-edprofile input[type="text"],
+div#sc-edprofile input[type="number"],
 div#sc-edprofile input[type="password"],
 div#sc-edprofile select,
 div#sc-edprofile textarea {

@@ -1,34 +1,23 @@
-<?php
-    session_start();
+<?php 
+session_start();
     include_once './fetch.php';
-    
+    $sort=new Fetch();
+    $canceled=$sort->canceled($_SESSION["user_id"]);
     if(isset($_POST["logout"])){
         session_destroy();
         header("location:../Login.php");
     }
-    //To Check User IS Login
     if(!isset($_SESSION["isblock"])){
         header("location:../Login.php");
     }
-
-    $id=new Fetch();
-    $ride_id=$id->last_added_id();
-    unset($_SESSION["distance"]);
-   
-    
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../assets/fetchuser1.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -39,7 +28,7 @@
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style2.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="data.js"></script>
+    <script src="../script/datafetch.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -47,14 +36,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="../assets/invoice.css">
+        <link rel="stylesheet" href="../assets/style2.css">
 </head>
+
 
 <body>
     <form method="post">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
-                <a href='index.php'><img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200></a>
+            <a href='index.php'><img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -63,13 +53,30 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto pl-auto text-center" id='active'>
                         <li class="nav-item mr-4">
-                            <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="dashboard.php">DashBoard<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item ml-2">
-                            <a class="nav-link" href="#">Feature</a>
+                        <li>
+                            <div class="dropdown show">
+                                <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ride
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="pending.php">Pending</a>
+                                    <a class="dropdown-item" href="canceled.php">Canceled</a>
+                                    <a class="dropdown-item" href="completed.php">Completed</a>
+                                </div>
+                            </div>
                         </li>
+
                         <li class="nav-item ml-2">
-                            <a class="nav-link" href="user_profile.php">Rides Detail</a>
+                            <a class="nav-link" href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Edit
+                                Profile</a>
+                        </li>
+                      
+                        <li class="nav-item ml-2">
+
                         </li>
                         <form action="post">
                             <input type="submit" name="logout" value="logout"
@@ -80,53 +87,30 @@
             </nav>
         </div>
     </form>
-    <div class="invoice-card">
-        <div class="invoice-title">
-            <div id="main-title">
-                <h4>INVOICE</h4>
-                <span>#89 292</span>
-            </div>
-        </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Dates</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Spend On Ride</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <?php 
+            $canceled=$sort->completed($_SESSION["user_id"]);
+        foreach($canceled as $key=>$value){
+            echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td>Completed</td></tr>";
+    }
+            
+         
+            ?>
+            </tr>
 
-        <div class="invoice-details">
-            <table class="invoice-table">
-                <thead>
-                    <tr>
-
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr class="row-data">
-
-                        <td>current Location-><?php echo $_SESSION["current"]; ?></td>
-                    </tr>
-
-                    <tr class="row-data">
-
-                        <td>Destiny Location-><?php echo $_SESSION["destination"]; ?></td>
-                    </tr>
-
-                    <tr class="calc-row">
-                        <td colspan="2">Total</td>
-                        <td><?php  echo $_SESSION["total"]; ?></td>
-                    </tr>
-                    <tr class="calc-row">
-                        <td colspan="2">Cab Type</td>
-                        <td><?php echo $_SESSION["cab_type"]; ?></td>
-                    </tr>
-                    <tr>
-                        <td><a href="index.php" type="button" class="btn btn-primary">Confirm</a></td>
-                        <td><a href='cancel.php?id=<?php echo $ride_id  ?>' type="button"
-                                class="btn btn-primary">Cancel</a></td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-    </div>
+        </tbody>
+    </table>
 </body>
 
 </html>

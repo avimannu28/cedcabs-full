@@ -85,6 +85,31 @@
           return $acending_fare;
         }
 
+        public function completed($id){
+          $completed=[];
+          $sql=mysqli_query($this->conn,"SELECT * from tbl_ride where statuss='2' and customer_user_id=$id");
+          while($row=mysqli_fetch_assoc($sql)){
+            array_push($completed,$row);
+          }
+          return $completed;
+        }
+        public function pending($id){
+          $completed=[];
+          $sql=mysqli_query($this->conn,"SELECT * from tbl_ride where statuss='1' and customer_user_id=$id");
+          while($row=mysqli_fetch_assoc($sql)){
+            array_push($completed,$row);
+          }
+          return $completed;
+        }
+        public function canceled($id){
+          $completed=[];
+          $sql=mysqli_query($this->conn,"SELECT * from tbl_ride where is_cancel='1' and customer_user_id=$id");
+          while($row=mysqli_fetch_assoc($sql)){
+            array_push($completed,$row);
+          }
+          return $completed;
+        }
+
         public function name_for_edit($id){
           $sql=mysqli_query($this->conn,"SELECT * FROM tbl_user where user_id=$id");
           while($row=mysqli_fetch_assoc($sql)){
@@ -107,7 +132,7 @@
         }
        public function total_ride_of_user($id){
          $sum=0;
-         $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where customer_user_id=$id");
+         $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where customer_user_id=$id and is_cancel='0'");
          while($data=mysqli_fetch_assoc($sql)){
            $sum=$sum+1;
          }
@@ -118,7 +143,7 @@
 
        public function total_spend_of_user($id){
             $sum=0;
-         $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where customer_user_id=$id");
+         $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride where customer_user_id=$id and statuss='2' and is_cancel='0'");
          while($data=mysqli_fetch_assoc($sql)){
            $sum=$sum+$data["total_fare"];
          }
@@ -141,5 +166,28 @@
       }
       return $sum;
 }
+    public function last_added_id(){
+      $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride ORDER BY ride_id DESC LIMIT 1");
+      while($data=mysqli_fetch_assoc($sql)){
+        return $data["ride_id"];
+      }
     }
+
+    public function cancel_by_user($id){
+      $sql=mysqli_query($this->conn,"UPDATE tbl_ride SET is_cancel='0' WHERE ride_id=$id");
+     header("location:./index.php");
+    }
+
+    public function datefilter($current,$last,$id){
+      $date=[];
+      $sql=mysqli_query($this->conn,"SELECT * FROM tbl_ride WHERE customer_user_id ='$id' AND ride_date BETWEEN '$current' AND '$last'");
+      while($data=mysqli_fetch_assoc($sql)){
+      array_push($date,$data);
+      }
+      return($date);
+    }
+
+
+    }
+    
 ?>

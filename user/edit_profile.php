@@ -1,16 +1,28 @@
 <?php
+session_start();
     include_once './fetch.php';
     if(isset($_GET["id"])){
         $fetch=new Fetch();
         $name=$fetch->name_for_edit($_GET["id"]);
         $phone=$fetch->phone_for_edit($_GET["id"]);
     }
+    if(!isset($_SESSION["isblock"])){
+        header("location:../Login.php");
+    }
+    if(isset($_POST["logout"])){
+        session_destroy();
+        header("location:../Login.php");
+    }
     if(isset($_POST["submit"])){
         $name=$_POST["name"];
         $phone=$_POST["phone"];
-        $fetch->update_profile($name,$phone,$_GET["id"]);
-        echo "<script>alert('Sucessfully updated')</scipt>";
-        header("location:index.php");
+        if($name=='' ||$phone==''){
+            echo '<script>alert("FILL ALL THE FIELD")</script>';
+        }else{
+            $fetch->update_profile($name,$phone,$_GET["id"]);
+            echo "<script>alert('Sucessfully updated')</scipt>";
+            header("location:index.php");
+        }
     }
 ?>
 
@@ -43,6 +55,21 @@
     <link rel="stylesheet" href="../assets/form.css">
 
 </head>
+<script>
+    $(document).ready(function(){
+        $("#phone").on("keyup",function(){
+            number=$("#phone").val()
+            if(isNaN(number)){
+                number = number.slice(0, -1);
+                $("#phone").val(number);
+            }
+            if(number>=9999999999){
+                number = number.slice(0, -1);
+                $("#phone").val(number)
+            }
+        })
+    })
+</script>
 
 
 <body>
@@ -63,8 +90,20 @@
                         <li class="nav-item mr-4">
                             <a class="nav-link" href="dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item ml-2">
-                            <a class="nav-link" href="user_profile.php">Rides Detail</a>
+                        
+                        <li>
+                        <div class="dropdown show">
+                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ride 
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="pending.php">Pending</a>
+                                <a class="dropdown-item" href="canceled.php">Canceled</a>
+                                <a class="dropdown-item" href="completed.php">Completed</a>
+                            </div>
+                        </div>
                         </li>
                         <form action="post">
 
@@ -95,8 +134,9 @@
                                         <div class="sc-container">
                                             <input type="text" placeholder="Name" name="name"
                                                 value=<?php echo $name;  ?> />
-                                            <input type="text" placeholder="Phone" name="phone"
-                                                value=<?php  echo  $phone?> />
+                                                <input type="text" id="phone" name="phone" placeholder="123-45-678"   value=<?php  echo  $phone?> required>
+                                            <!-- <input type="number" placeholder="Phone" name="phone"
+                                                value=<?php  echo  $phone?> /> -->
                                             <input type="submit" value="Update" name="submit" />
                                         </div>
                                     </div>

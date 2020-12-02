@@ -29,7 +29,7 @@ if(!isset($_SESSION["isblock"])){
     <link rel="stylesheet" href="../assets/style2.css">
     <link rel="stylesheet" href="../assets/fetchuser1.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="data.js"></script>
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -54,6 +54,27 @@ $(document).ready(function() {
             }
         });
     })
+
+    $("#filter").on('click',function(){
+        current=$("#firstdate").val()
+        last=$("#lastdate").val()
+        console.log(current,last)
+        $.ajax({
+            url: "sort.php",
+            type: "POST",
+            data: {
+                filter: 'filter',
+                current:current,
+                last:last,
+                
+            },
+            success: function(response) {
+                $("#show").html(response)
+            }
+        });
+
+    })
+
 })
 </script>
 
@@ -62,7 +83,7 @@ $(document).ready(function() {
     <form method="post">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
-                <img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200>
+            <a href='index.php'><img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -96,7 +117,13 @@ $(document).ready(function() {
         <option value="date_desc">Date Decending</option>
         <option value="fare_asc">Fare Ascending</option>
         <option value="fare_desc">Fare Decending</option>
+        <option value="pending">Pending</option>
+        <option value="canceled">Canceled</option>
+        <option value="completed">Completed</option>
     </select>
+    <input type="date" id='firstdate'>
+    <input type="date" id='lastdate'>
+    <input type='submit' value='filter' id='filter'>
     <table>
         <thead>
             <tr>
@@ -112,11 +139,14 @@ $(document).ready(function() {
                 <?php 
             
             $row=$profile->profiles($_SESSION["user_id"]);
+            
             foreach($row as $key=>$value){
                 if($value["statuss"]=='0'){
                     echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td>Wait to confirm</td></tr>";
-                }elseif($value["statuss"]=='1'){
+                }elseif($value["statuss"]=='1' && $value['is_cancel']=='0'){
                     echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td>Pending</td></tr>";
+                }elseif($value['is_cancel']=='1'){
+                    echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td>Canceled</td></tr>";
                 }
                 else{
                     echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td>Completed</td></tr>";
