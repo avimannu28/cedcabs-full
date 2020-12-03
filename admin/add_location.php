@@ -34,7 +34,7 @@ if (isset($_POST['logout'])) {
 <body>
     <form style='width:50%;margin-left:200px;' method="POST" action='add_new_location.php'>
         <label for="name">Location</label>
-        <input type="text" id="name" name="location" placeholder="Location Name">
+        <input type="text" id="name" name="location" placeholder="Location Name" pattern="[a-zA-Z]+[a-zA-Z0-9\s]*" required>
         <label for="name">Distance</label>
         <input type="text" id="distance" name="distance" placeholder="distance">
         <label for="Available">Available</label>

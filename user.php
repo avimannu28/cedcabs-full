@@ -11,9 +11,23 @@ class User
  {
   $this->conn = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
  }
+
+ public function check($username, $name, $mobile, $password){
+      $username=trim($username);
+      $username=strtolower( $username );
+      $sql=mysqli_query($this->conn,"SELECT * from tbl_user");
+      while($data=mysqli_fetch_assoc($sql)){
+            if($data["username"]==$username){
+                  return 0;
+            }
+      }
+     
+ }
  public function signup($username, $name, $mobile, $password)
  {
+      $username=trim($username);
   $password = md5($password);
+   $username=strtolower( $username );
   $sql      = mysqli_query($this->conn, "INSERT INTO tbl_user (username,name_user,dateofsignup,mobile,isblock,password,is_admin)
         VALUES('$username','$name',NOW(),'$mobile','1','$password','0')");
   echo $sql;
@@ -22,6 +36,7 @@ class User
  public function login($username, $password)
  {
   $password = md5($password);
+   $username=strtolower( $username );
   $sql      = mysqli_query($this->conn, "select * from tbl_user where username='$username' and password='$password'");
   $result   = $sql->num_rows;
   if ($result == 1) {

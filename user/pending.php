@@ -156,7 +156,7 @@ if (!isset($_SESSION["isblock"])) {
                 <?php
 $canceled = $sort->pending($_SESSION["user_id"]);
 foreach ($canceled as $key => $value) {
- echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$$value[total_fare]</td><td>Pending</td></tr>";
+ echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$$value[total_fare]</td><td>Pending |<a href='cancel.php?id=".$value['ride_id']."'>Cancel Ride</a></td></tr>";
 }
 
 ?>

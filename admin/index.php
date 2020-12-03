@@ -110,7 +110,7 @@ $total        = $all->total_earning();
                                 <i class="fa fa-share fa-5x"></i>
                             </div>
                             <h4 class="text-uppercase">Total Earning</h4>
-                            <h1 class="display-1"><?php echo $total ?></h1>
+                            <h1 class="display-1">$ <?php echo $total ?></h1>
                         </div>
                     </div>
                 </a>

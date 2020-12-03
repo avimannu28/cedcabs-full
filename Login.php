@@ -78,7 +78,7 @@ if (isset($_POST["submit"])) {
                     <div class="col col-sm-12 col-12 col-xs-12 mt-4">
                         <form method="POST" action="">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter UserName" name="username"
+                                <input type="text" class="form-control" placeholder="Enter UserName" name="username" pattern="[a-zA-Z][a-zA-Z0-9-_\.]{1,20}"
                                     required>
                             </div>
                             <div class="form-group">
