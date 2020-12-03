@@ -1,21 +1,19 @@
 <?php
-    session_start();
-    include_once './fetch.php';
-    
-    if(isset($_POST["logout"])){
-        session_destroy();
-        header("location:../Login.php");
-    }
-    //To Check User IS Login
-    if(!isset($_SESSION["isblock"])){
-        header("location:../Login.php");
-    }
+session_start();
+include_once './fetch.php';
 
-    $id=new Fetch();
-    $ride_id=$id->last_added_id();
-    unset($_SESSION["distance"]);
-   
-    
+if (isset($_POST["logout"])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+//To Check User IS Login
+if (!isset($_SESSION["isblock"])) {
+ header("location:../Login.php");
+}
+
+$id      = new Fetch();
+$ride_id = $id->last_added_id();
+unset($_SESSION["distance"]);
 
 ?>
 
@@ -109,7 +107,7 @@
 
                     <tr class="calc-row">
                         <td colspan="2">Total</td>
-                        <td><?php  echo $_SESSION["total"]; ?></td>
+                        <td><?php echo $_SESSION["total"]; ?></td>
                     </tr>
                     <tr class="calc-row">
                         <td colspan="2">Cab Type</td>
@@ -117,7 +115,7 @@
                     </tr>
                     <tr>
                         <td><a href="index.php" type="button" class="btn btn-primary">Confirm</a></td>
-                        <td><a href='cancel.php?id=<?php echo $ride_id  ?>' type="button"
+                        <td><a href='cancel.php?id=<?php echo $ride_id ?>' type="button"
                                 class="btn btn-primary">Cancel</a></td>
 
                     </tr>

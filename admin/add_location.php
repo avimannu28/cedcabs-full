@@ -1,14 +1,13 @@
-<?php 
-    include './sidebar.php';
-    include_once './request.php';
-    if(!isset($_SESSION["admin"]))
-    {
-      header("location:../Login.php");
-    }
-    if(isset($_POST['logout'])){
-      session_destroy();
-      header("location:../Login.php");
-    }
+<?php
+include './sidebar.php';
+include_once './request.php';
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
 ?>
 
 <!DOCTYPE html>

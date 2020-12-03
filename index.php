@@ -1,22 +1,22 @@
-<?php 
+<?php
 session_start();
-    include_once './user/fetch.php';
-    $fetch=new Fetch();
-    if(isset($_POST["logout"])){
-        session_destroy();
-        header("location:../Login.php");
-    }
-    if(isset($_GET["data"])){
-        unset($_SESSION["distance"]);
-    }   
-    if(isset($_SESSION["distance"])){
-        header("location:./ride/ride.php");
-    }
-    if(isset($_SESSION["isblock"])){
-        header("location:./user/index.php");
-    }
-    
-   ?>
+include_once './user/fetch.php';
+$fetch = new Fetch();
+if (isset($_POST["logout"])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+if (isset($_GET["data"])) {
+ unset($_SESSION["distance"]);
+}
+if (isset($_SESSION["distance"])) {
+ header("location:./ride/ride.php");
+}
+if (isset($_SESSION["isblock"])) {
+ header("location:./user/index.php");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,8 +53,8 @@ session_start();
                     <li class="nav-item ml-2">
                         <a class="nav-link" href="#">Feature</a>
                     </li>
-                   
-                   
+
+
                 </ul>
             </div>
         </nav>
@@ -82,11 +82,11 @@ session_start();
                                 <select class="form-control" name="current" id="current">
                                     <option >SELECT</option>
                                     <?php
-                                        $location=$fetch->locations();
-                                        foreach($location as $key=>$row){
-                                            echo "<option value=$row[location_name]>$row[location_name]</option>";
-                                        }
-                                    ?>
+$location = $fetch->locations();
+foreach ($location as $key => $row) {
+ echo "<option value=$row[location_name]>$row[location_name]</option>";
+}
+?>
                                 </select>
                             </div>
                             <div class="form-group col-xs-12">
@@ -94,11 +94,11 @@ session_start();
                                 <select class="form-control" name="destination" id="destination">
                                 <option >SELECT</option>
                                 <?php
-                                        $location=$fetch->locations();
-                                        foreach($location as $key=>$row){
-                                            echo "<option value=$row[location_name]>$row[location_name]</option>";
-                                        }
-                                    ?>
+$location = $fetch->locations();
+foreach ($location as $key => $row) {
+ echo "<option value=$row[location_name]>$row[location_name]</option>";
+}
+?>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -114,7 +114,7 @@ session_start();
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Luggage Weight" name="luggage" id="luggages">
                             </div>
-                            <span id="fare" style="display:none;">Total fare</span><input type="text" name="price" id="Price" style="display:none;">
+                            <span id="fare" style="display:none;">Total fare $</span><input type="text" name="price" id="Price" style="display:none;">
                             <input type="submit" class="btn btn-dark  pl-4 pr-4 mt-4" name="submit"  value='book' id="books" style="display:none;">
                             <button  class="btn btn-dark  pl-4 pr-4 mt-4" value="Calculate Fare" id="submit" >Calculate Fare</button>
                         </form>

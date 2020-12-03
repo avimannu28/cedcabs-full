@@ -1,57 +1,54 @@
-<?php 
+<?php
 include_once './class.ride.php';
-$ride=new ride();
+$ride = new ride();
 
+if (isset($_POST["submit"])) {
+ $_SESSION["current"]     = $_POST["current"];
+ $_SESSION["destination"] = $_POST["destination"];
+ $_SESSION["total"]       = $_POST["price"];
+ $_SESSION["cab_type"]    = $_POST["cab_type"];
 
- if(isset($_POST["submit"])){
-     $_SESSION["current"] = $_POST["current"]; 
-     $_SESSION["destination"] = $_POST["destination"];
-     $_SESSION["total"]=$_POST["price"];
-     $_SESSION["cab_type"]=$_POST["cab_type"];
-
-     //check for luggage type if null then
-    if( $_SESSION["cab_type"]=="CedMicro"){
-        $_SESSION["luggage"]=0;
-    }else{
-        $_SESSION["luggage"]=$_POST["luggage"];
-    }
-    if($_SESSION["luggage"]==""){
-        $_SESSION["luggage"]=0;
-    }
+ //check for luggage type if null then
+ if ($_SESSION["cab_type"] == "CedMicro") {
+  $_SESSION["luggage"] = 0;
+ } else {
+  $_SESSION["luggage"] = $_POST["luggage"];
+ }
+ if ($_SESSION["luggage"] == "") {
+  $_SESSION["luggage"] = 0;
+ }
 }
 
+//check if the user is login or not
+if (!isset($_SESSION["isblock"])) {
+ header("location:../Login.php");
+} else {
+ if (!isset($_SESSION["booked"])) {
+  if ((time() - $_SESSION['timer']) > 180) {
+   unset($_SESSION["current"]);
+   unset($_SESSION["destination"]);
+   unset($_SESSION["total"]);
+   unset($_SESSION["cab_type"]);
+   unset($_SESSION["distance"]);
+   header("location:../user/dashboard.php");
+  } else {
+   $ride->rider($_SESSION["current"], $_SESSION["destination"], $_SESSION["distance"], $_SESSION["luggage"], $_SESSION["total"], $_SESSION["user_id"]);
+   $ride->ride_success();
+   header("location:../user/user_invoice.php");
+  }
+ }
+}
 
-   //check if the user is login or not
-    if(!isset($_SESSION["isblock"])){
-        header("location:../Login.php");
-    }
-    else{
-        if(!isset($_SESSION["booked"])){
-            $ride->rider($_SESSION["current"], $_SESSION["destination"],$_SESSION["distance"],$_SESSION["luggage"],$_SESSION["total"],$_SESSION["user_id"]);  
-        }$ride->ride_success();
-        header("location:../user/user_invoice.php");
+//logout
+if (isset($_POST["logout"])) {
+ session_destroy();
+ header("location:../Login.php");
+}
 
-    }
-
-    //logout
-    if(isset($_POST["logout"])){
-        session_destroy();
-        header("location:../Login.php");
-    }
-
-  
-
-  
-
-    
-    
-
-   
 ?>
 
-<?php 
+<?php
 
-   
 ?>
 
 <!DOCTYPE html>

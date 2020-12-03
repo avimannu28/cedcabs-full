@@ -1,21 +1,20 @@
-<?php 
+<?php
 include './sidebar.php';
 include_once './request.php';
-$all=new request();
-if(!isset($_SESSION["admin"]))
-    {
-      header("location:../Login.php");
-    }
-    if(isset($_POST['logout'])){
-      session_destroy();
-      header("location:../Login.php");
-    }
-    $ride_request=$all->ride_request();
-    $user_request=$all->user_request();
-    $user=$all->alluser();
-    $ride=$all->allrides();
-    $location=$all->location();
-    $total=$all->total_earning();
+$all = new request();
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+$ride_request = $all->ride_request();
+$user_request = $all->user_request();
+$user         = $all->alluser();
+$ride         = $all->allrides();
+$location     = $all->location();
+$total        = $all->total_earning();
 
 ?>
 
@@ -47,7 +46,7 @@ if(!isset($_SESSION["admin"]))
                             <div class="rotate">
                             </div>
                             <h4 class="text-uppercase">Ride Request</h4>
-                            <h1 class="display-1"><?php echo count($ride_request);   ?></h1>
+                            <h1 class="display-1"><?php echo count($ride_request); ?></h1>
                         </div>
                     </div>
             </div>
@@ -59,7 +58,7 @@ if(!isset($_SESSION["admin"]))
                             <div class="rotate">
                             </div>
                             <h4 class="text-uppercase">All Rides</h4>
-                            <h1 class="display-1"><?php echo count($ride)  ?></h1>
+                            <h1 class="display-1"><?php echo count($ride) ?></h1>
                         </div>
                     </div>
                 </a>
@@ -72,7 +71,7 @@ if(!isset($_SESSION["admin"]))
                                 <i class="fa fa-twitter fa-5x"></i>
                             </div>
                             <h4 class="text-uppercase">All User</h4>
-                            <h1 class="display-1"><?php echo count($user);?></h1>
+                            <h1 class="display-1"><?php echo count($user); ?></h1>
                         </div>
                     </div>
                 </a>
@@ -98,7 +97,7 @@ if(!isset($_SESSION["admin"]))
                                 <i class="fa fa-user fa-5x"></i>
                             </div>
                             <h4 class="text-uppercase">Total Location</h4>
-                            <h1 class="display-1"><?php echo count($location);   ?></h1>
+                            <h1 class="display-1"><?php echo count($location); ?></h1>
                         </div>
                     </div>
                 </a>

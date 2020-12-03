@@ -1,11 +1,12 @@
-<?php 
-    include_once './user.php';
-    $user=new User();
-    if(isset($_POST["submit"])){
-        $username=$_POST["username"];
-        $password=$_POST["password"];  
-        $user->login($username,$password);
-    }
+<?php
+include_once './user.php';
+$user = new User();
+if (isset($_POST["submit"])) {
+ $username = $_POST["username"];
+ $password = $_POST["password"];
+ $user->login($username, $password);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -34,11 +35,13 @@
 </head>
 
 
+
+
 <body>
 <form method="post">
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-light">
-            <img class="navbar-brand img-responsive" src='./logo.png' height=100 width=200>
+            <a href="index.php"><img class="navbar-brand img-responsive" src='./logo.png' height=100 width=200></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -50,7 +53,7 @@
                     <li class="nav-item ml-2">
                         <a class="nav-link" href="#">Feature</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </nav>
@@ -86,7 +89,7 @@
                             <a href="signup.php" class="btn btn-dark pl-4 pr-4 ml-4 mt-4">SignUp</a>
                         </form>
                         <div class="form-group text-center">
-                         
+
                         </div>
                     </div>
                 </div>

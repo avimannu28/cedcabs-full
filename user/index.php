@@ -1,21 +1,19 @@
-<?php 
+<?php
 session_start();
-    include_once './fetch.php';
-    $fetch=new Fetch();
-    if(isset($_POST["logout"])){
-        session_destroy();
-        header("location:../Login.php");
-    }
-    if(isset($_SESSION["distance"])){
-        header("location:../ride/ride.php");
-    }
-    if(!isset($_SESSION["isblock"])){
-        header("location:../Login.php");
-    }
-   
-   
-   
-   ?>
+include_once './fetch.php';
+$fetch = new Fetch();
+if (isset($_POST["logout"])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+if (isset($_SESSION["distance"])) {
+ header("location:../ride/ride.php");
+}
+if (!isset($_SESSION["isblock"])) {
+ header("location:../Login.php");
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,16 +56,26 @@ session_start();
                         <li class="nav-item mr-4">
                             <a class="nav-link" href="dashboard.php">DashBoard<span class="sr-only">(current)</span></a>
                         </li>
-                      
-                        <li class="nav-item ml-2">
-                            <a class="nav-link" href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Edit
-                                Profile</a>
-                        </li>
                         <li>
                         <div class="dropdown show">
                             <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Ride 
+                               Edit Profile
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="nav-link" href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Update Info</a>
+
+                            <a class="nav-link" href='password.php?id=<?php echo $_SESSION["user_id"] ?>'>Update Password</a>
+                            </div>
+                        </div>
+                        </li>
+                        <li class="nav-item ml-2">
+
+                        <li>
+                        <div class="dropdown show">
+                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ride
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -82,7 +90,7 @@ session_start();
                         </li>
                         <form action="post">
                             <input type="submit" name="logout" value="logout"
-                                style="background-color:white;border:none;">
+                            style="background-color:white;border:none;border:1px solid black;background-color:black;color:white">
                         </form>
                     </ul>
                 </div>
@@ -111,11 +119,11 @@ session_start();
                                 <select class="form-control" name="current" id="current">
                                     <option>SELECT</option>
                                     <?php
-                                        $location=$fetch->locations();
-                                        foreach($location as $key=>$row){
-                                            echo "<option value=$row[location_name]>$row[location_name]</option>";
-                                        }
-                                    ?>
+$location = $fetch->locations();
+foreach ($location as $key => $row) {
+ echo "<option value=$row[location_name]>$row[location_name]</option>";
+}
+?>
                                 </select>
                             </div>
                             <div class="form-group col-xs-12">
@@ -123,10 +131,10 @@ session_start();
                                 <select class="form-control" name="destination" id="destination">
                                     <option>SELECT</option>
                                     <?php
-                                        foreach($location as $key=>$row){
-                                            echo "<option value=$row[location_name]>$row[location_name]</option>";
-                                        }
-                                    ?>
+foreach ($location as $key => $row) {
+ echo "<option value=$row[location_name]>$row[location_name]</option>";
+}
+?>
                                 </select>
                             </div>
                             <div class="form-group">

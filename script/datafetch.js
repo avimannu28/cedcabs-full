@@ -30,6 +30,36 @@ $(document).ready(function() {
             $("#Price").html("Entered Weight IS :" + $("#luggages").val())
         }
     })
+    $("#current").on("change", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
+    $("#destination").on("change", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
+    $("#datas").on("change", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
+    $("#luggages").on("keyup", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
+    $("#Price").on("keydown", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
 
 
 

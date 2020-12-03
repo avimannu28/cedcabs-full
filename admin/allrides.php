@@ -1,17 +1,15 @@
-<?php 
-    include_once './request.php';
-    include './sidebar.php';
-    $allride=new request();
-    if(!isset($_SESSION["admin"]))
-    {
-      header("location:../Login.php");
-    }
-    if(isset($_POST['logout'])){
-      session_destroy();
-      header("location:../Login.php");
-    }
-   
-    
+<?php
+include_once './request.php';
+include './sidebar.php';
+$allride = new request();
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+
 ?>
 
 
@@ -80,14 +78,14 @@
         </thead>
         <tbody id="show">
             <tr>
-                <?php 
-         $ride=$allride->allrides();
-         $_SESSION["rides"]=count($ride);
-        foreach($ride as $key=>$value){
-          echo "<tr><td>".$value["from_location"]."</td><td>".$value["to_location"]."</td><td>".$value["ride_date"]."</td><td>".$value["luggage"]."</td><td>".$value["total_fare"]."</td></tr>";
-        }
+                <?php
+$ride              = $allride->allrides();
+$_SESSION["rides"] = count($ride);
+foreach ($ride as $key => $value) {
+ echo "<tr><td>" . $value["from_location"] . "</td><td>" . $value["to_location"] . "</td><td>" . $value["ride_date"] . "</td><td>" . $value["luggage"] . "</td><td>" . $value["total_fare"] . "</td></tr>";
+}
 
-        ?>
+?>
             </tr>
 
         </tbody>

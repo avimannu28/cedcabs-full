@@ -1,23 +1,48 @@
 <?php
-session_start();
 include_once './fetch.php';
-$sort     = new Fetch();
-$canceled = $sort->canceled($_SESSION["user_id"]);
+session_start();
+if (!isset($_SESSION["isblock"])) {
+ header("location:../Login.php");
+}
 if (isset($_POST["logout"])) {
  session_destroy();
  header("location:../Login.php");
 }
-if (!isset($_SESSION["isblock"])) {
- header("location:../Login.php");
+if (isset($_GET['id'])) {
+ if (isset($_POST["submit"])) {
+  $firstpassword = $_POST["firstpassword"];
+  $secound       = $_POST["secoundpassword"];
+  if ($firstpassword == "" || $secound == "") {
+   echo "<script>alert('Fill All The Field')</script>";
+  } else {
+   if ($firstpassword == $secound) {
+    $password = new Fetch();
+    $pass=$password->change_password($_POST["secoundpassword"], $_GET["id"]);
+    if($pass==1){
+     echo "<script>alert('Same password Entered')</script>";
+    }
+    if($pass==2){
+    unset($_SESSION["isblock"]);
+    header("location:../Login.php");
+    }
+   } else {
+    echo "<script>alert('BOTH FIELD PASSWORD ARE NOT SAME')</script>";
+   }
+  }
+
+ }
 }
+
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../assets/fetchuser1.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -36,47 +61,7 @@ if (!isset($_SESSION["isblock"])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-        <link rel="stylesheet" href="../assets/style2.css">
-    <script>
-        $(document).ready(function(){
-            $("#week").on("change",function(){
-                week=$("#week").val();
-                weeks=week.substring(6,8);
-                console.log(weeks);
-                $.ajax({
-                url: "sort.php",
-                type: "POST",
-                data: {
-                cancel: 'week_cancel',
-                weeks:weeks,
-                },
-                success: function(response) {
-                $("#show").html(response)
-                }
-            });
-        })
-         $("#filter").on('click',function(){
-        current=$("#firstdate").val()
-        last=$("#lastdate").val()
-        console.log(current,last)
-        $.ajax({
-            url: "sort.php",
-            type: "POST",
-            data: {
-                filter: 'filter',
-                cancel:'cancel',
-                current:current,
-                last:last,
-
-            },
-            success: function(response) {
-                $("#show").html(response)
-            }
-        });
-
-    })
-    })
-    </script>
+    <link rel="stylesheet" href="../assets/password.css">
 </head>
 
 
@@ -84,7 +69,7 @@ if (!isset($_SESSION["isblock"])) {
     <form method="post">
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
-            <a href='index.php'><img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200></a>
+                <a href='index.php'><img class="navbar-brand img-responsive" src='../logo.png' height=100 width=200></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -99,6 +84,23 @@ if (!isset($_SESSION["isblock"])) {
                             <div class="dropdown show">
                                 <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Edit Profile
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="nav-link"
+                                        href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Update Info</a>
+
+                                    <a class="nav-link" href='password.php?id=<?php echo $_SESSION["user_id"] ?>'>Update
+                                        Password</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item ml-2">
+
+                        <li>
+                            <div class="dropdown show">
+                                <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Ride
                                 </a>
 
@@ -109,21 +111,6 @@ if (!isset($_SESSION["isblock"])) {
                                 </div>
                             </div>
                         </li>
-
-                        <li>
-                        <div class="dropdown show">
-                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               Edit Profile
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="nav-link" href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Update Info</a>
-
-                            <a class="nav-link" href='password.php?id=<?php echo $_SESSION["user_id"] ?>'>Update Password</a>
-                            </div>
-                        </div>
-                        </li>
-
                         <li class="nav-item ml-2">
 
                         </li>
@@ -136,34 +123,36 @@ if (!isset($_SESSION["isblock"])) {
             </nav>
         </div>
     </form>
-      <label for="Sorting" style="margin-left:400px">Filter:</label>
-    <input type='week' id="week">
-    <input type="date" id='firstdate'>
-    <input type="date" id='lastdate'>
-    <input type='submit' value='filter' id='filter'>
-    <table>
-        <thead>
-            <tr>
-                <th>Dates</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Spend On Ride</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody id="show">
-            <tr>
-                <?php
-$canceled = $sort->canceled($_SESSION["user_id"]);
-foreach ($canceled as $key => $value) {
- echo "<tr><td>$value[ride_date]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$$value[total_fare]</td><td>Canceled</td></tr>";
-}
+    <div class="container-fluid bg-overlay">
+        <div class="row text-center">
+            <div class="col text-center" id="mid">
+                <h1>Book a City Taxi to your destination in town</h1>
+                <h4>Choose from range of category and prices</h4>
+            </div>
 
-?>
-            </tr>
+        </div>
+        <div class="card login-form" style="margin-left:400px;width:40%;margin-top:100px;margin-bottom:100px;">
+            <div class="card-body">
+                <h3 class="card-title text-center">Change password</h3>
 
-        </tbody>
-    </table>
+                <!--Password must contain one lowercase letter, one number, and be at least 7 characters long.-->
+
+                <div class="card-text">
+                    <form method='post'>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Your new password</label>
+                            <input type="password" name="firstpassword" class="form-control form-control-sm" placeholder="enter new password">
+                        </div>
+                        <div class="form-group" style="margin-bottom:50px;">
+                            <label for="exampleInputEmail1">Repeat password</label>
+                            <input type="password" name="secoundpassword" class="form-control form-control-sm"  placeholder="re-enter new password">
+                        </div>
+                        <button type="submit" name="submit" class="btn btn-dark btn-block submit-btn">Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="page-footer font-small blue">
         <div class="row">
             <div class="col-sm-4 text-center py-3">
@@ -181,11 +170,8 @@ foreach ($canceled as $key => $value) {
                     <a href="#">CedCabs Developer</a>
                 </div>
             </div>
-
         </div>
-
     </footer>
-
 </body>
 
 </html>

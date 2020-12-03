@@ -1,18 +1,16 @@
-<?php 
+<?php
 include_once './user.php';
-    $user=new User();
-    if(isset($_POST["submit"])){
-        $username=$_POST["username"];
-        $name=$_POST["name"];
-        $mobile=$_POST["phone_no"];
-        $password=$_POST["password"];
-        if($username==""||$name==""||$mobile==""||$password==""){
-            echo "<script>alert('Enter all Field first')</script>";
-        }else{
-            $user->signup($username,$password,$mobile,$password);
-        }
-        
-    }
+$user = new User();
+if (isset($_POST["submit"])) {
+ $username = $_POST["username"];
+ $name     = $_POST["name"];
+ $mobile   = $_POST["phone_no"];
+ $password = $_POST["password"];
+
+  $user->signup($username, $password, $mobile, $password);
+ 
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -84,23 +82,23 @@ include_once './user.php';
                     <div class="col col-sm-12 col-12 col-xs-12 mt-4">
                         <form method="POST" action="signup.php">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter UserName" name="username">
+                                <input type="text" class="form-control" placeholder="Enter UserName" name="username" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter Name" name="name">
+                                <input type="text" class="form-control" placeholder="Enter Name" name="name" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Phone Number" name="phone_no">
+                                <input type="text" class="form-control" placeholder="Phone Number" name="phone_no" required>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password" name="password">
+                                <input type="password" class="form-control" placeholder="Password" name="password" required>
                             </div>
                             <p id="Price" class="text-center"></p>
                             <input type="submit" class="btn btn-dark ml-4 pl-4 pr-4 mt-4 text-center" value="Sign In"
                                 name="submit">
                                 <a href="Login.php" class="btn btn-dark ml-4 pl-4 pr-4 mt-4">Login</a>
                         </form>
-                       
+
                     </div>
                 </div>
             </div>

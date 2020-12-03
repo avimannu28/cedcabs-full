@@ -1,9 +1,12 @@
 <?php
-
-  if(isset($_POST['logout'])){
-    session_destroy();
-    header("location:../Login.php");
-  }
+include_once './request.php';
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,24 +40,24 @@
     <div id="wrapper" class="active">
         <div id="sidebar-wrapper">
             <ul id="sidebar_menu" class="sidebar-nav">
-                <li class="sidebar-brand"><a id="menu-toggle" href="index.php">Menu<span id="main_icon"
-                            class="glyphicon glyphicon-align-justify"></span></a></li>
+                <i><li class="sidebar-brand"><a id="menu-toggle" href="index.php">Dashboard<span id="main_icon"
+                            class="glyphicon glyphicon-align-justify"></span></a></li></i>
             </ul>
             <ul class="sidebar-nav" id="sidebar">
                 <b>
                     <li><a href="#" style="color:aqua">Rides</a></li>
                 </b>
 
-                <li><a href="completed_ride.php">>Complet Rides-</a></li>
-                <li><a href="allrides.php">>All Rides</a></li>
-                <li><a href="fetch_user_ride.php">>Ride Request</a></li>
+                <li><a href="completed_ride.php">Complet Rides-</a></li>
+                <li><a href="allrides.php">All Rides</a></li>
+                <li><a href="fetch_user_ride.php">Ride Request</a></li>
 
 
                 <b>
                     <li><a href="#" style="color:aqua">User</a></li>
                 </b>
 
-                <li><a href="all_user.php">>Unblocked User</a></li>
+                <li><a href="all_user.php">Unblocked User</a></li>
                 <li><a href="fetch_user_request.php">>Blocked/request</a></li>
 
 

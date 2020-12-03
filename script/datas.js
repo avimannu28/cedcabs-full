@@ -12,7 +12,6 @@ $(document).ready(function() {
 
     //VALIDATIONS
     $("#current").on("change", function() {
-        console.log("ok")
         var current = $("#current :selected").val()
         $("#destination option[value=" + current + "]").prop("disabled", true).siblings()
             .removeAttr("disabled");
@@ -25,29 +24,59 @@ $(document).ready(function() {
     $("#luggages").on("keyup", function() {
         var a = $("#luggages").val();
         if (isNaN(a)) {
-            $("#Price").html("ENTER Luggage In number")
-        } else {
-            $("#Price").html("Entered Weight IS :" + $("#luggages").val())
+            a = a.slice(0, -1);
+            $("#luggages").val(a)
         }
     })
 
+    $("#current").on("change", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
+    $("#destination").on("change", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
+    $("#datas").on("change", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
+    $("#luggages").on("keyup", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
+    $("#Price").on("keydown", function() {
+        $("#books").css("display", "none");
+        $("#Price").css("display", "none");
+        $("#fare").css("display", "none");
+
+    })
 
 
     //AJAX VALUE
     $("#submit").on("click", function(ev) {
+
+
         ev.preventDefault();
         var current = $("#current :selected").val()
         var destination = $("#destination :selected").val()
         var selected = $("#datas :selected").val()
         var luggages = $("#luggages").val()
         if (isNaN(luggages)) {
-            console.log("ok")
             $("#Price").html("ENTER Luggage In number")
         } else if (current == "SELECT" || destination == "SELECT" || selected == "SELECT") {
             alert("PLEASE SELECT ALL FIELD FIRST")
 
         } else {
-            console.log("done");
+
             $.ajax({
                 url: './user/data.php',
                 type: 'POST',
@@ -57,7 +86,8 @@ $(document).ready(function() {
                     $("#Price").css("display", "block");
                     $("#fare").css("display", "inline");
                     $("#Price").val(response)
-                    console.log("inside");
+
+
 
                 }
             });

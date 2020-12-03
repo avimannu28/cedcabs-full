@@ -1,16 +1,15 @@
 <?php
-    include './sidebar.php';
-    include_once './request.php';
-    $ride=new request();
-    if(!isset($_SESSION["admin"]))
-    {
-      header("location:../Login.php");
-    }
-    if(isset($_POST['logout'])){
-      session_destroy();
-      header("location:../Login.php");
-    }
-    
+include './sidebar.php';
+include_once './request.php';
+$ride = new request();
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -56,14 +55,14 @@
   </thead>
   <tbody id="show">
     <tr>
-        <?php 
-              $name=$ride->ride_request();
-              foreach($name as $key=>$value){
-                echo "<tr><td>".$value["from_location"]."</td><td>".$value["to_location"]."</td><td>".$value['ride_date']."</td><td>".$value["luggage"]."</td><td>".$value["total_fare"]."</td><td><a href='accept_ride.php?id=".$value['ride_id']."'>Confirm </a>|<a href=''> Cancel</a></td></tr>";
-              }
-        ?>
+        <?php
+$name = $ride->ride_request();
+foreach ($name as $key => $value) {
+ echo "<tr><td>" . $value["from_location"] . "</td><td>" . $value["to_location"] . "</td><td>" . $value['ride_date'] . "</td><td>" . $value["luggage"] . "</td><td>" . $value["total_fare"] . "</td><td><a href='accept_ride.php?id=" . $value['ride_id'] . "'>Confirm </a>|<a href='delete_ride_request.php?id=".$value['ride_id']."'> Cancel</a></td></tr>";
+}
+?>
     </tr>
-    
+
   </tbody>
 </table>
 </body>

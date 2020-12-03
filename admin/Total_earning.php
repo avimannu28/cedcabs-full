@@ -1,19 +1,18 @@
 <?php
 
-    include './sidebar.php';
-    include_once './request.php';
-    $earning=new request();
-    $sum=$earning->total_earning();
-    echo"<h1 style='text-align:center'>$sum</h1>";
-    if(!isset($_SESSION["admin"]))
-    {
-      header("location:../Login.php");
-    }
-    if(isset($_POST['logout'])){
-      session_destroy();
-      header("location:../Login.php");
-    }
-  
+include './sidebar.php';
+include_once './request.php';
+$earning = new request();
+$sum     = $earning->total_earning();
+echo "<h1 style='text-align:center'>$$sum</h1>";
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,13 +75,15 @@ $(document).ready(function() {
             var bar_canvas = $("#bar_canvas");
             var barGraph = new Chart(bar_canvas, {
                 type: 'bar',
-                data: chartdata
+                data: chartdata,
+
             });
         },
         error: function(data) {
             console.log(data);
         }
     });
+
 });
 </script>
 

@@ -1,9 +1,12 @@
 <?php
-    
-    if(isset($_POST["logout"])){
-        session_destroy();
-        header("location:../Login.php");
-    }
+
+if (isset($_POST["logout"])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+if (!isset($_SESSION["isblock"])) {
+ header("location:../Login.php");
+}   
 ?>
 
 <head>

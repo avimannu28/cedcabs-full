@@ -1,17 +1,15 @@
 <?php
 
-    include './sidebar.php';
-    include_once './request.php';
-    $ride=new request();
-    if(!isset($_SESSION["admin"]))
-    {
-      header("location:../Login.php");
-    }
-    if(isset($_POST['logout'])){
-      session_destroy();
-      header("location:../Login.php");
-    }
-
+include './sidebar.php';
+include_once './request.php';
+$ride = new request();
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
 
 ?>
 
@@ -40,13 +38,13 @@
         <tbody>
 
             <tr>
-                <?php 
-        $row=$ride->invoice();
-        foreach($row as $key=>$value){
-            echo "<tr><td>$value[customer_user_id]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td><a href='print_invoice.php?id=".$value['ride_id']."'>Print</a></td></tr>";
-        }
-        
-        ?>
+                <?php
+$row = $ride->invoice();
+foreach ($row as $key => $value) {
+ echo "<tr><td>$value[customer_user_id]</td><td>$value[from_location]</td><td>$value[to_location]</td><td>$value[total_fare]</td><td><a href='print_invoice.php?id=" . $value['ride_id'] . "'>Print</a></td></tr>";
+}
+
+?>
             </tr>
 
         </tbody>

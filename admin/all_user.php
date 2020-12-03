@@ -1,15 +1,14 @@
 <?php
-    include 'sidebar.php';
-    include_once 'request.php';
-    $user=new request();
-    if(!isset($_SESSION["admin"]))
-    {
-      header("location:../Login.php");
-    }
-    if(isset($_POST['logout'])){
-      session_destroy();
-      header("location:../Login.php");
-    }
+include 'sidebar.php';
+include_once 'request.php';
+$user = new request();
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
 
 ?>
 
@@ -62,13 +61,13 @@
         </select>
         <tbody id="show">
             <tr>
-                <?php 
-          $row=$user->alluser();
-          $_SESSION["all_user"]=count($row);
-          foreach($row as $key=>$value){
-            echo "<tr><td>".$value["user_id"]."</td><td>".$value["username"]."</td><td>".$value["name_user"]."</td><td>".$value["dateofsignup"]."</td><td>".$value["isblock"]."</td><td><a href='deleteuser.php?id=".$value['user_id']."'>block</a></td></tr>";
-         }
-        ?>
+                <?php
+$row                  = $user->alluser();
+$_SESSION["all_user"] = count($row);
+foreach ($row as $key => $value) {
+ echo "<tr><td>" . $value["user_id"] . "</td><td>" . $value["username"] . "</td><td>" . $value["name_user"] . "</td><td>" . $value["dateofsignup"] . "</td><td>" . $value["isblock"] . "</td><td><a href='deleteuser.php?id=" . $value['user_id'] . "'>block</a></td></tr>";
+}
+?>
             </tr>
 
         </tbody>

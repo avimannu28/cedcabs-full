@@ -1,17 +1,15 @@
 <?php
-    include './sidebar.php';
-    include_once './request.php';
-    $all=new request();
-    if(!isset($_SESSION["admin"]))
-    {
-      header("location:../Login.php");
-    }
-    if(isset($_POST['logout'])){
-      session_destroy();
-      header("location:../Login.php");
-    }
- 
-    
+include './sidebar.php';
+include_once './request.php';
+$all = new request();
+if (!isset($_SESSION["admin"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST['logout'])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -60,14 +58,14 @@
         </thead>
         <tbody id="show">
             <tr>
-                <?php 
-        $row=$all->completedride();
-       
-        foreach($row as $key=>$value){
-          echo "<tr><td>".$value["from_location"]."</td><td>".$value["to_location"]."</td><td>".$value["luggage"]."</td><td>".$value["total_fare"]."</td><td><a href='delete_completed.php?id=".$value["ride_id"]."'>Delete </a></td></tr>";
-        }
+                <?php
+$row = $all->completedride();
 
-        ?>
+foreach ($row as $key => $value) {
+ echo "<tr><td>" . $value["from_location"] . "</td><td>" . $value["to_location"] . "</td><td>" . $value["luggage"] . "</td><td>" . $value["total_fare"] . "</td><td><a href='delete_completed.php?id=" . $value["ride_id"] . "'>Delete </a></td></tr>";
+}
+
+?>
             </tr>
 
         </tbody>

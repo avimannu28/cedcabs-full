@@ -1,29 +1,29 @@
 <?php
 session_start();
-    include_once './fetch.php';
-    if(isset($_GET["id"])){
-        $fetch=new Fetch();
-        $name=$fetch->name_for_edit($_GET["id"]);
-        $phone=$fetch->phone_for_edit($_GET["id"]);
-    }
-    if(!isset($_SESSION["isblock"])){
-        header("location:../Login.php");
-    }
-    if(isset($_POST["logout"])){
-        session_destroy();
-        header("location:../Login.php");
-    }
-    if(isset($_POST["submit"])){
-        $name=$_POST["name"];
-        $phone=$_POST["phone"];
-        if($name=='' ||$phone==''){
-            echo '<script>alert("FILL ALL THE FIELD")</script>';
-        }else{
-            $fetch->update_profile($name,$phone,$_GET["id"]);
-            echo "<script>alert('Sucessfully updated')</scipt>";
-            header("location:index.php");
-        }
-    }
+include_once './fetch.php';
+if (isset($_GET["id"])) {
+ $fetch = new Fetch();
+ $name  = $fetch->name_for_edit($_GET["id"]);
+ $phone = $fetch->phone_for_edit($_GET["id"]);
+}
+if (!isset($_SESSION["isblock"])) {
+ header("location:../Login.php");
+}
+if (isset($_POST["logout"])) {
+ session_destroy();
+ header("location:../Login.php");
+}
+if (isset($_POST["submit"])) {
+ $name  = $_POST["name"];
+ $phone = $_POST["phone"];
+ if ($name == '' || $phone == '') {
+  echo '<script>alert("FILL ALL THE FIELD")</script>';
+ } else {
+  $fetch->update_profile($name, $phone, $_GET["id"]);
+  echo "<script>alert('Sucessfully updated')</scipt>";
+  header("location:index.php");
+ }
+}
 ?>
 
 
@@ -44,7 +44,6 @@ session_start();
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/style2.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="data.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
@@ -90,12 +89,25 @@ session_start();
                         <li class="nav-item mr-4">
                             <a class="nav-link" href="dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
                         </li>
-                        
                         <li>
                         <div class="dropdown show">
                             <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Ride 
+                               Edit Profile
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="nav-link" href='edit_profile.php?id=<?php echo $_SESSION["user_id"] ?>'>Update Info</a>
+
+                            <a class="nav-link" href='password.php?id=<?php echo $_SESSION["user_id"] ?>'>Update Password</a>
+                            </div>
+                        </div>
+                        </li>
+
+                        <li>
+                        <div class="dropdown show">
+                            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Ride
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -108,7 +120,7 @@ session_start();
                         <form action="post">
 
                             <input type="submit" name="logout" value="logout"
-                                style="background-color:white;border:none;">
+                            style="background-color:white;border:none;border:1px solid black;background-color:black;color:white">
                         </form>
                     </ul>
                 </div>
@@ -133,10 +145,10 @@ session_start();
                                         <h1>Edit Profile Form</h1>
                                         <div class="sc-container">
                                             <input type="text" placeholder="Name" name="name"
-                                                value=<?php echo $name;  ?> />
-                                                <input type="text" id="phone" name="phone" placeholder="123-45-678"   value=<?php  echo  $phone?> required>
+                                                value=<?php echo $name; ?> />
+                                                <input type="text" id="phone" name="phone" placeholder="123-45-678"   value=<?php echo $phone ?> required>
                                             <!-- <input type="number" placeholder="Phone" name="phone"
-                                                value=<?php  echo  $phone?> /> -->
+                                                value=<?php echo $phone ?> /> -->
                                             <input type="submit" value="Update" name="submit" />
                                         </div>
                                     </div>
